@@ -1,7 +1,7 @@
 <script lang="ts">
   import { extent, bisector } from "d3-array";
   import { scaleLinear, scaleSqrt } from "d3-scale";
-  import {select} from "d3-selection";
+  import { select } from "d3-selection";
   import { fade } from "svelte/transition";
 
   import data from "./assets/data.js";
@@ -39,60 +39,59 @@
   }
 
   function handleExit(e) {
-	select(this)
+    select(this)
       .selectAll("circle")
       .attr("cy", height / 2);
     select(this).selectAll("text").attr("fill", "gray");
     showTooltip = false;
   }
 </script>
-<div class="container">
-<div class="chart" bind:clientHeight={height} bind:clientWidth={width}>
-  {#if showTooltip}
-    <div
-      class="tooltip"
-      style:left="{tooltipPos}px"
-      style:top="{height / 2}px"
-      in:fade
-    >
-      Lorum ipsum dolor sit amit
-    </div>
-  {/if}
 
-  <svg>
-    {#each data as point, i}
-      <g
-        transform="translate({xScale(i)}, 0)"
-        on:mouseenter={handleHover}
-        on:mouseleave={handleExit}
-        id="lane-{i}"
+<div class="container">
+  <div class="chart" bind:clientHeight={height} bind:clientWidth={width}>
+    {#if showTooltip}
+      <div
+        class="tooltip"
+        style:left="{tooltipPos}px"
+        style:top="{height / 2}px"
+        in:fade
       >
-        <rect y={padding.top} {height} x={-barWidth / 2} width={barWidth} />
-        <circle
-          r={yScale(point.size)}
-          id="{i}-circle"
-          cy={height / 2}
-          fill={showTooltip && tooltipPos !== xScale(i)
-            ? "transparent"
-            : "#a11"}
-          stroke={showTooltip && tooltipPos !== xScale(i)
-            ? "#00000030"
-            : "none"}
-        />
-        <text
-          fill="grey"
-          style:font-size=".8rem">{point.name}</text
+        Lorum ipsum dolor sit amit
+      </div>
+    {/if}
+
+    <svg>
+      {#each data as point, i}
+        <g
+          transform="translate({xScale(i)}, 0)"
+          on:mouseenter={handleHover}
+          on:mouseleave={handleExit}
+          id="lane-{i}"
         >
-      </g>
-    {/each}
-  </svg>
+          <rect y={padding.top} {height} x={-barWidth / 2} width={barWidth} />
+          <circle
+            r={yScale(point.size)}
+            id="{i}-circle"
+            cy={height / 2}
+            fill={showTooltip && tooltipPos !== xScale(i)
+              ? "transparent"
+              : "#a11"}
+            stroke={showTooltip && tooltipPos !== xScale(i)
+              ? "#00000030"
+              : "none"}
+          />
+          <text fill="grey" style:font-size=".8rem">{point.name}</text>
+        </g>
+      {/each}
+    </svg>
+  </div>
 </div>
-</div>
+
 <style>
   .chart {
     max-width: 600px;
-	margin-inline: auto;
-	margin-block: 5rem;
+    margin-inline: auto;
+    margin-block: 5rem;
   }
 
   svg {
@@ -122,14 +121,13 @@
 
   .tooltip {
     position: absolute;
-	transform: translateX(-50%);
+    transform: translateX(-50%);
     font-family: "Andale Mono";
     font-size: 0.6rem;
     color: #373737;
     opacity: 0.7;
     max-width: 100px;
     text-align: center;
-	pointer-events: none;
-
+    pointer-events: none;
   }
 </style>

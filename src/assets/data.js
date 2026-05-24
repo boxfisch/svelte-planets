@@ -22,5 +22,9 @@ export default [
   {
     name: "Moon",
     size: 100,
-  },
+  }, 
+{
+  name: "Europa",
+  size: 200,
+}
 ];

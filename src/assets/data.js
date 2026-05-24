@@ -27,4 +27,8 @@ export default [
   name: "Europa",
   size: 200,
 }
+{
+  name: "Venus",
+  size: 700,
+}
 ];
